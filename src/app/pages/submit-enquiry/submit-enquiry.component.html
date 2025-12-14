@@ -70,6 +70,7 @@
                                     <span class="input-group-text"><i class="fas fa-list"></i></span>
                                     <select [(ngModel)]="newEnquiryObj.categoryId" class="form-select" id="categoryId"
                                         name="categoryId" required>
+                                        <option value="" disabled>Select Category</option>
                                         @for(item of categoryList; track $index) {
                                         <option [value]="item.categoryId">{{item.categoryName}}</option>
                                         }
@@ -112,6 +113,7 @@
                                     <span class="input-group-text"><i class="fas fa-tasks"></i></span>
                                     <select [(ngModel)]="newEnquiryObj.statusId" class="form-select" id="statusId"
                                         name="statusId" required>
+                                        <option value="" disabled>Select Status</option>
                                         @for(item of statusList; track $index) {
                                         <option [value]="item.statusId">{{item.statusName}}</option>
                                         }

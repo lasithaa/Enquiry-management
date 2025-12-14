@@ -30,6 +30,13 @@
             <i class="fas fa-paper-plane me-1 d-lg-none"></i> Submit Enquiry
           </a>
         </li>
+        @if(isLoggedIn){
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="enquiry-list" routerLinkActive="active">
+            <i class="fas fa-list me-1 d-lg-none"></i> Enquiry List
+          </a>
+        </li>
+        }
         <li class="nav-item">
           <a class="nav-link px-3" href="#">
             <i class="fas fa-info-circle me-1 d-lg-none"></i> About
@@ -49,8 +56,8 @@
             {{ username.charAt(0) }}
           </div>
           <span class="fw-semibold text-dark small">{{ username }}</span>
-          <button class="btn btn-link text-danger p-0 ms-2" (click)="logout()" title="Logoff">
-            <i class="fas fa-sign-out-alt"></i>
+          <button class="btn btn-sm btn-outline-danger ms-2" (click)="logout()">
+            Logout
           </button>
         </div>
         } @else {

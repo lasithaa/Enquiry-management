@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,23 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'enquiry-management';
-  isLoggedIn = false;
-  username = 'User';
+
+  router = inject(Router);
+
+  get isLoggedIn(): boolean {
+    return localStorage.getItem('enquiryapp') != null;
+  }
+
+  get username(): string {
+    return localStorage.getItem('enquiryapp') || 'User';
+  }
 
   login() {
-    this.isLoggedIn = true;
+    this.router.navigateByUrl('login');
   }
 
   logout() {
-    this.isLoggedIn = false;
+    localStorage.removeItem('enquiryapp');
+    this.router.navigateByUrl('login');
   }
 }

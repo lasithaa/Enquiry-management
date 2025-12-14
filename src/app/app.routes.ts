@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SubmitEnquiryComponent } from './pages/submit-enquiry/submit-enquiry.component';
+import { EnquiryListComponent } from './pages/enquiry-list/enquiry-list.component';
 
 export const routes: Routes = [
 
@@ -22,6 +23,12 @@ export const routes: Routes = [
     {
         path: 'submit-enquiry',
         component: SubmitEnquiryComponent
+
+    },
+    {
+        path: 'enquiry-list',
+        component: EnquiryListComponent
+
 
     }
 

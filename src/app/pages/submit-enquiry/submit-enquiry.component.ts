@@ -63,7 +63,7 @@ export class SubmitEnquiryComponent implements OnInit {
         alert("Enquiry Submitted Successfully");
       },
       error: (error: any) => {
-        alert("Error", error);
+        alert("Error" + error);
       }
     })
   }

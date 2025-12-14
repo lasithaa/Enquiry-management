@@ -1,1 +1,124 @@
-<p>enquiry-list works!</p>
+<div class="page-wrapper">
+    <!-- Animated Background -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container-fluid container-custom">
+        <div class="glass-card">
+            <!-- Header -->
+            <div class="list-header d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2>Enquiries</h2>
+                    <p class="text-muted mb-0">Manage and track customer enquiries</p>
+                </div>
+                <div class="actions d-flex gap-3">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search enquiries...">
+                    </div>
+                    <button class="btn btn-primary btn-new">
+                        <i class="fas fa-plus me-2"></i> New Enquiry
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-hover custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="5%">#</th>
+                            <th scope="col" width="15%">Client</th>
+                            <th scope="col" width="20%">Contact</th>
+                            <th scope="col" width="20%">Message</th>
+                            <th scope="col" width="10%">Status</th>
+                            <th scope="col" width="10%">Date</th>
+                            <th scope="col" width="10%">Converted</th>
+                            <th scope="col" width="10%" class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of enquiryList; track $index) {
+                        <tr>
+                            <td><span class="id-badge">#{{item.enquiryId}}</span></td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-xs">{{item.customerName.charAt(0)}}</div>
+                                    <span class="fw-semibold">{{item.customerName}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="email-text"><i class="fas fa-envelope-open-text me-1"></i>
+                                        {{item.customerEmail}}</span>
+                                    <span class="phone-text"><i class="fas fa-phone-alt me-1"></i>
+                                        {{item.customerPhone}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="message-preview" title="{{item.message}}">
+                                    {{item.message}}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-{{item.statusId}}">
+                                    @if(item.statusId === 44) { New }
+                                    @else if (item.statusId === 45) { In Progress }
+                                    @else { Completed }
+                                </span>
+                            </td>
+                            <td>
+                                <div class="date-info">
+                                    <span>{{item.enquiryDate | date:'mediumDate'}}</span>
+                                    <small>{{item.enquiryDate | date:'shortTime'}}</small>
+                                </div>
+                            </td>
+                            <td>
+                                @if (item.isConverted) {
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">
+                                    <i class="fas fa-check-circle me-1"></i> Yes
+                                </span>
+                                } @else {
+                                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">
+                                    <i class="fas fa-times-circle me-1"></i> No
+                                </span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-action btn-edit" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-action btn-view" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer / Pagination -->
+            <div class="list-footer d-flex justify-content-between align-items-center mt-3">
+                <span class="text-muted small">Showing 1 to {{enquiryList.length}} of {{enquiryList.length}}
+                    entries</span>
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item disabled"><a class="page-link" href="#"><i
+                                    class="fas fa-chevron-left"></i></a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
