@@ -1,0 +1,174 @@
+<div class="page-wrapper">
+    <!-- Decorative Background Shapes -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container-custom">
+        <div class="form-header">
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you. Send us your enquiry today!</p>
+        </div>
+
+        <div class="form-card">
+            <form id="enquiryForm">
+                <!-- Enquiry ID (Hidden) -->
+                <input type="hidden" id="enquiryId" name="enquiryId" value="0">
+
+                <!-- Section: Personal Info -->
+                <div class="form-section">
+                    <h5 class="section-title"><i class="fas fa-user-circle"></i> Personal Info</h5>
+
+                    <div class="form-group">
+                        <label for="customerName" class="form-label">Full Name <span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" [(ngModel)]="newEnquiryObj.customerName" class="form-control"
+                                id="customerName" name="customerName" placeholder="e.g. John Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="customerEmail" class="form-label">Email <span
+                                        class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" [(ngModel)]="newEnquiryObj.customerEmail" class="form-control"
+                                        id="customerEmail" name="customerEmail" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="customerPhone" class="form-label">Phone <span
+                                        class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" [(ngModel)]="newEnquiryObj.customerPhone" class="form-control"
+                                        id="customerPhone" name="customerPhone" placeholder="+1 (555) 000-0000"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Enquiry Details -->
+                <div class="form-section">
+                    <h5 class="section-title"><i class="fas fa-info-circle"></i> Enquiry Details</h5>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="categoryId" class="form-label">Category <span
+                                        class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-list"></i></span>
+                                    <select [(ngModel)]="newEnquiryObj.categoryId" class="form-select" id="categoryId"
+                                        name="categoryId" required>
+                                        @for(item of categoryList; track $index) {
+                                        <option [value]="item.categoryId">{{item.categoryName}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="enquiryType" class="form-label">Type <span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                    <input type="text" [(ngModel)]="newEnquiryObj.enquiryType" class="form-control"
+                                        id="enquiryType" name="enquiryType" placeholder="e.g. Product Question"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="message" class="form-label">Message <span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text align-items-start pt-2"><i class="fas fa-comment"></i></span>
+                            <textarea class="form-control" [(ngModel)]="newEnquiryObj.message" id="message"
+                                name="message" rows="4" placeholder="Describe your enquiry..." required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Additional Info -->
+                <div class="form-section">
+                    <h5 class="section-title"><i class="fas fa-cog"></i> Processing</h5>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="statusId" class="form-label">Status <span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-tasks"></i></span>
+                                    <select [(ngModel)]="newEnquiryObj.statusId" class="form-select" id="statusId"
+                                        name="statusId" required>
+                                        @for(item of statusList; track $index) {
+                                        <option [value]="item.statusId">{{item.statusName}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label d-block">Converted?</label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" [(ngModel)]="newEnquiryObj.isConverted" [value]="true"
+                                        class="btn-check" name="isConverted" id="convertedYes">
+                                    <label class="btn btn-outline-primary" for="convertedYes">Yes</label>
+
+                                    <input type="radio" [(ngModel)]="newEnquiryObj.isConverted" [value]="false"
+                                        class="btn-check" name="isConverted" id="convertedNo">
+                                    <label class="btn btn-outline-primary" for="convertedNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="enquiryDate" class="form-label">Date
+                                    <span class="required">*</span></label>
+                                <input type="datetime-local" [(ngModel)]="newEnquiryObj.enquiryDate"
+                                    class="form-control" id="enquiryDate" name="enquiryDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="followUpDate" class="form-label">Follow-up</label>
+                                <input type="datetime-local" [(ngModel)]="newEnquiryObj.followUpDate"
+                                    class="form-control" id="followUpDate" name="followUpDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="feedback" class="form-label">Feedback</label>
+                        <textarea class="form-control" [(ngModel)]="newEnquiryObj.feedback" id="feedback"
+                            name="feedback" rows="2" placeholder="Internal notes..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="form-actions mt-5">
+                    <button type="button" (click)="onSaveEnquiry()" class="btn btn-primary btn-lg w-100 mb-3 shadow-sm">
+                        <i class="fas fa-paper-plane me-2"></i> Submit Enquiry
+                    </button>
+                    <button type="reset" class="btn btn-light w-100 text-muted">
+                        Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
