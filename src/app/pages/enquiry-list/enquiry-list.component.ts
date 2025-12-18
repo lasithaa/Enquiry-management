@@ -1,6 +1,9 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MasterServiceService } from '../../services/master-service.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { IEnquiry } from '../../model/Interface/master.model';
 
 @Component({
   selector: 'app-enquiry-list',
@@ -8,10 +11,12 @@ import { MasterServiceService } from '../../services/master-service.service';
   templateUrl: './enquiry-list.component.html',
   styleUrl: './enquiry-list.component.css'
 })
-export class EnquiryListComponent implements OnInit {
+export class EnquiryListComponent implements OnInit, OnDestroy {
 
-  enquiryList: any[] = [];
+  enquiryList: IEnquiry[] = [];
   masterService = inject(MasterServiceService);
+  router = inject(Router);
+  subscription !: Subscription;
 
 
 
@@ -21,7 +26,7 @@ export class EnquiryListComponent implements OnInit {
 
   getAllEnquiry() {
 
-    this.masterService.getAllEnquiry().subscribe({
+    this.subscription = this.masterService.getAllEnquiry().subscribe({
       next: (res: any) => {
         this.enquiryList = res.data;
       },
@@ -31,6 +36,14 @@ export class EnquiryListComponent implements OnInit {
       }
     })
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  addNewEnquiry() {
+    this.router.navigate(['/submit-enquiry']);
   }
 
 

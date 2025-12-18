@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
+import { IApiResponseModel } from '../model/Interface/master.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +16,30 @@ export class MasterServiceService {
   // Make sure to restart dev server after proxy.conf.json is created: ng serve
   private apiUrl = '/api/Enquiry';
 
+  // getAllCategory() {
+  //   return this.http.get(`${this.apiUrl}/get-categories`);
+  // }
+
   getAllCategory() {
-    return this.http.get(`${this.apiUrl}/get-categories`);
+    return this.http.get<IApiResponseModel>(`${this.apiUrl}/get-categories`).pipe(
+      map((response: IApiResponseModel) => response.data)
+    );
   }
+
+  // getAllStatus() {
+  //   return this.http.get(`${this.apiUrl}/get-statuses`);
+  // }
 
   getAllStatus() {
-    return this.http.get(`${this.apiUrl}/get-statuses`);
+    return this.http.get<IApiResponseModel>(`${this.apiUrl}/get-statuses`).pipe(
+      map((response: IApiResponseModel) => response.data)
+    )
   }
 
+
+
   saveEnquiry(obj: any) {
-    return this.http.post<any>(`${this.apiUrl}/`, obj);
+    return this.http.post<any>(`${this.apiUrl}/create-enquiry`, obj);
   }
 
   getAllEnquiry() {
