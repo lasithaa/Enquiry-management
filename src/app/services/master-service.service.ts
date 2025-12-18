@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IApiResponseModel } from '../model/Interface/master.model';
 
 @Injectable({
@@ -38,12 +38,14 @@ export class MasterServiceService {
 
 
 
-  saveEnquiry(obj: any) {
-    return this.http.post<any>(`${this.apiUrl}/create-enquiry`, obj);
+  saveEnquiry(obj: any): Observable<IApiResponseModel> {
+    return this.http.post<IApiResponseModel>(`${this.apiUrl}/create-enquiry`, obj);
   }
 
-  getAllEnquiry() {
-    return this.http.get(`${this.apiUrl}/get-enquiries`);
+  getAllEnquiry(): Observable<any> {
+    return this.http.get<IApiResponseModel>(`${this.apiUrl}/get-enquiries`).pipe(
+      map((response: IApiResponseModel) => response.data)
+    );
   }
 
 }

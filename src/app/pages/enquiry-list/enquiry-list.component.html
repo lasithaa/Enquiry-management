@@ -25,6 +25,7 @@
                 </div>
             </div>
 
+            @if ($enquiryList | async; as enquiryList) {
             <!-- Table -->
             <div class="table-responsive">
                 <table class="table table-hover custom-table">
@@ -119,6 +120,7 @@
                     </ul>
                 </nav>
             </div>
+            }
         </div>
     </div>
 </div>
